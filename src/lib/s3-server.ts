@@ -18,10 +18,11 @@ export async function downloadFromS3(file_key:string) {
             Bucket: process.env.NEXT_PUBLIC_S3_BUCKET_NAME!,
             Key : file_key,
         }
+        
         const obj= await s3.getObject(params).promise();
-        // anish 
-
+        
         const file_name = `/tmp/pdf-${Date.now()}.pdf`
+
         fs.writeFileSync(file_name, obj.Body as Buffer)
 
         return file_name;
